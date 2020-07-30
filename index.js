@@ -10,9 +10,9 @@ const port = 8080;
 
 const client = connect('jagsx3acyacg', 'n3bk8f7mwzzpa5tckt6q2rqb329e4ekbr7ukdtsnghnrv6sh5773h35hukjb7dau', "86962", {'location': 'us-east'});
 
-const userToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoic2Vzc2lvbl9pZCJ9.e_aA_ujjw5I897T2VlbLDZZP8IRLszl01XPVORrYdx0"
+const userToken = client.createUserToken("session_id")
 // const
-// console.log('userToken', userToken)
+console.log('userToken', userToken)
 
 const screenshotFeed = client.feed('screenshot', 'session_id', userToken);
 const eventFeed = client.feed('event_critical', 'session_id', userToken);
@@ -60,14 +60,18 @@ app.post('/event-log', async (req, res) => {
     object: "event_id",
     foreign_id: "1234",
     event: {
-      name: "Multiple Face",
-      event_type_id: 16
+      "event_type_id": 81,
+      "name": "Multiple Face Detected",
+      "severity": "critical",
+      "timestamp": new Date()
     },
     candidate: {
-      id: 1,
-      name: "John Doe"
-    },
-    time: time
+      "first_name": "John",
+      "id": 1234567,
+      "last_name": "Decardo",
+      "middle_name": "Dawny",
+      "session_id": "e17b4330-b1ff-11ea-a680-1f8739f45757"
+    }
   })
   console.log(time)
   res.sendStatus(201)
